@@ -1,2 +1,2 @@
-# Algoritmos---Trabajo-Integrador-2017
+# AlgoritmosTrabajoIntegrador2017
 Sistema Solar
