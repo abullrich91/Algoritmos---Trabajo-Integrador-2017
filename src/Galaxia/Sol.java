@@ -1,4 +1,6 @@
-import java.util.List;
+package Galaxia;
+import Helper.Coordenadas;
+import Helper.Sentido;
 
 
 public class Sol extends SistemaSolar {

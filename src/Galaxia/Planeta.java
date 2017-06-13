@@ -1,3 +1,7 @@
+package Galaxia;
+
+import Helper.Sentido;
+
 public class Planeta extends SistemaSolar {
 	private String nombre;
 	private Sentido sentido;

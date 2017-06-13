@@ -1,3 +1,4 @@
+package Helper;
 
 public class Horario extends Sentido {
 	private Integer velocidad;

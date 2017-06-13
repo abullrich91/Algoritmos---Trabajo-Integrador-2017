@@ -9,6 +9,7 @@ public class Antihorario extends Sentido {
 	/**
 	 * @return the velocidad
 	 */
+	@Override
 	public Integer getVelocidad() {
 		return velocidad;
 	}
@@ -19,5 +20,5 @@ public class Antihorario extends Sentido {
 	public void setVelocidad(Integer velocidad) {
 		this.velocidad = velocidad;
 	}
-	
+
 }

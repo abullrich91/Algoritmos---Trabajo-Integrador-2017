@@ -1,5 +1,9 @@
+package Galaxia;
 import java.util.ArrayList;
 import java.util.List;
+
+import Helper.Coordenadas;
+import Helper.MovimientosCosmicos;
 
 public class SistemaSolar implements MovimientosCosmicos {
 	private Sol sol;
