@@ -1,3 +1,12 @@
+import Condicion.CondicionSequia;
+import Galaxia.Galaxia;
+import Galaxia.Planeta;
+import Galaxia.SistemaSolar;
+import Galaxia.Sol;
+import Helper.Antihorario;
+import Helper.Coordenadas;
+import Helper.Horario;
+
 public class Main {
 	public static void main(String[] args) {
 		Integer dia = 1;

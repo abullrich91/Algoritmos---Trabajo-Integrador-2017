@@ -8,7 +8,7 @@ public class Planeta extends SistemaSolar {
 	private Integer distancia;
 	private Integer grados;
 
-	Planeta(String nombre, Sentido sentido, Integer distancia, Integer grados) {
+	public Planeta(String nombre, Sentido sentido, Integer distancia, Integer grados) {
 		this.nombre = nombre;
 		this.sentido = sentido;
 		this.distancia = distancia;

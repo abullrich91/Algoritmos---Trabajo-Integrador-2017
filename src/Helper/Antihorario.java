@@ -1,9 +1,10 @@
+package Helper;
 
-public class Horario extends Sentido {
+public class Antihorario extends Sentido {
 	private Integer velocidad;
-	
-	public Horario(Integer velocidad) {
-		this.velocidad = velocidad;
+
+	public Antihorario(Integer velocidad) {
+		this.velocidad = -velocidad;
 	}
 
 	/**
@@ -15,7 +16,8 @@ public class Horario extends Sentido {
 	}
 
 	/**
-	 * @param velocidad the velocidad to set
+	 * @param velocidad
+	 *            the velocidad to set
 	 */
 	public void setVelocidad(Integer velocidad) {
 		this.velocidad = velocidad;
