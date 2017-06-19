@@ -4,7 +4,7 @@ import Helper.Sentido;
 
 
 public class Sol extends SistemaSolar {
-	private Coordenadas coordenadas = new Coordenadas(0, 0);
+	private Coordenadas coordenadas = new Coordenadas(0.0, 0.0);
 	
 	public Sol() {
 		
@@ -29,7 +29,7 @@ public class Sol extends SistemaSolar {
 	}
 	
 	public void rotate(Planeta planeta) {
-		Integer gradosIniciales = planeta.getGrados();
+		Double gradosIniciales = planeta.getGrados();
 		Sentido sentido = planeta.getSentido();
 		planeta.setGrados((gradosIniciales + sentido.getVelocidad()) % 360);
 	}

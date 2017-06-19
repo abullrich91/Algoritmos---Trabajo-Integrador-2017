@@ -6,9 +6,14 @@ public class Planeta extends SistemaSolar {
 	private String nombre;
 	private Sentido sentido;
 	private Integer distancia;
-	private Integer grados;
+	private Double grados;
+	private Planeta next;
+	
+	public Planeta() {
+		
+	}
 
-	public Planeta(String nombre, Sentido sentido, Integer distancia, Integer grados) {
+	public Planeta(String nombre, Sentido sentido, Integer distancia, Double grados) {
 		this.nombre = nombre;
 		this.sentido = sentido;
 		this.distancia = distancia;
@@ -63,7 +68,7 @@ public class Planeta extends SistemaSolar {
 	/**
 	 * @return the grados
 	 */
-	public Integer getGrados() {
+	public Double getGrados() {
 		return grados;
 	}
 
@@ -71,8 +76,16 @@ public class Planeta extends SistemaSolar {
 	 * @param grados
 	 *            the grados to set
 	 */
-	public void setGrados(Integer grados) {
+	public void setGrados(Double grados) {
 		this.grados = grados;
 	}
 
+	public Planeta getNext() {
+		return next;
+	}
+
+	public void setNext(Planeta next) {
+		this.next = next;
+	}
+	
 }
