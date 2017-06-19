@@ -6,7 +6,7 @@ import Galaxia.SistemaSolar;
 
 public interface MovimientosCosmicos {
 	public Boolean arePlanetsAlignedWithEachOther(SistemaSolar sistemaSolar);
-	public Boolean arePlanetsAlignedWithSun(List<Planeta> planeta);
+	public Boolean arePlanetsAlignedWithSun(SistemaSolar sistemaSolar);
 	public Boolean isWithinPlanetsArea(SistemaSolar sistemaSolar);
 	public Coordenadas getCoordenadas(Planeta planeta, Integer dias);
 }

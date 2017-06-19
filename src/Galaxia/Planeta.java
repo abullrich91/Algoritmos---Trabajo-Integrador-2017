@@ -2,7 +2,7 @@ package Galaxia;
 
 import Helper.Sentido;
 
-public class Planeta extends SistemaSolar {
+public class Planeta extends SistemaSolar implements Cuerpo {
 	private String nombre;
 	private Sentido sentido;
 	private Integer distancia;

@@ -3,7 +3,7 @@ import Helper.Coordenadas;
 import Helper.Sentido;
 
 
-public class Sol extends SistemaSolar {
+public class Sol extends SistemaSolar implements Cuerpo {
 	private Coordenadas coordenadas = new Coordenadas(0.0, 0.0);
 	
 	public Sol() {
@@ -32,6 +32,16 @@ public class Sol extends SistemaSolar {
 		Double gradosIniciales = planeta.getGrados();
 		Sentido sentido = planeta.getSentido();
 		planeta.setGrados((gradosIniciales + sentido.getVelocidad()) % 360);
+	}
+
+	@Override
+	public Integer getDistancia() {
+		return 0;
+	}
+
+	@Override
+	public Double getGrados() {
+		return 0.0;
 	}
 	
 }

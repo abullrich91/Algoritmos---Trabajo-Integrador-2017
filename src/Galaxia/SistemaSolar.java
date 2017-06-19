@@ -10,7 +10,7 @@ import Helper.MovimientosCosmicos;
 public class SistemaSolar implements MovimientosCosmicos {
 	private Sol sol;
 	private List<Planeta> planetas;
-
+	
 	public SistemaSolar() {
 		this.planetas = new ArrayList<Planeta>();
 	}
@@ -65,33 +65,27 @@ public class SistemaSolar implements MovimientosCosmicos {
 
 	@Override
 	public Boolean arePlanetsAlignedWithEachOther(SistemaSolar sistemaSolar) {
-		Iterator<Planeta> planetIterator = sistemaSolar.getPlanetas().iterator();
-		Planeta planetaOrigen = planetIterator.next();
+		ArrayList<Cuerpo> cuerpoArray = new ArrayList<Cuerpo>();
+		for (Planeta planeta : sistemaSolar.getPlanetas()) {
+			cuerpoArray.add(planeta);
+		}
+		Iterator<Cuerpo> planetIterator = cuerpoArray.iterator();
 		ArrayList<Double> arrayPendientes = new ArrayList<Double>();
-		while (planetIterator.hasNext()) {
-			Coordenadas coordenadasOrigen = this.determinarPuntos(planetaOrigen);
-			Planeta planetaDestino = planetIterator.next();
-			Coordenadas coordenadasDestino = this.determinarPuntos(planetaDestino);
-			Double pendiente = determinarPendiente(coordenadasOrigen, coordenadasDestino);
-			System.out.println(Math.round(pendiente * 100.0) / 100.0);
-			arrayPendientes.add(Math.round(pendiente * 100.0) / 100.0);
-			planetaOrigen = planetaDestino;
-		}
-		Double pendienteAnterior = arrayPendientes.get(0);
-		for (Double pendiente : arrayPendientes) {
-			Double valorAbsoluto = Math.abs(pendienteAnterior - pendiente);
-			if (valorAbsoluto >= 0.3) {
-				return false;
-			}
-		}
-		System.out.println("Planetas Alineados!!!");
-		return true;
+		arrayPendientes = getSlopeArray(arrayPendientes, planetIterator);
+		return slopeComparator(arrayPendientes);
 	}
 
 	@Override
-	public Boolean arePlanetsAlignedWithSun(List<Planeta> planeta) {
-		// TODO Auto-generated method stub
-		return false;
+	public Boolean arePlanetsAlignedWithSun(SistemaSolar sistemaSolar) {
+		ArrayList<Cuerpo> cuerpoArray = new ArrayList<Cuerpo>();
+		cuerpoArray.add(sistemaSolar.getSol());
+		for (Planeta planeta : sistemaSolar.getPlanetas()) {
+			cuerpoArray.add(planeta);
+		}
+		Iterator<Cuerpo> cuerpoIterator = cuerpoArray.iterator();
+		ArrayList<Double> arrayPendientes = new ArrayList<Double>();
+		arrayPendientes = getSlopeArray(arrayPendientes, cuerpoIterator);
+		return slopeComparator(arrayPendientes);
 	}
 
 	@Override
@@ -99,7 +93,7 @@ public class SistemaSolar implements MovimientosCosmicos {
 		return false;
 	}
 
-	private Coordenadas determinarPuntos(Planeta planeta) {
+	private Coordenadas determinarPuntos(Cuerpo planeta) {
 		Integer hipotenusa = planeta.getDistancia();
 		Double grados = planeta.getGrados();
 		Double catetoOpuesto = Math.sin(grados) * hipotenusa;
@@ -111,6 +105,31 @@ public class SistemaSolar implements MovimientosCosmicos {
 		Double nominador = coordenadasDestino.getCoordenadaY() - coordenadasOrigen.getCoordenadaY();
 		Double denominador = coordenadasDestino.getCoordenadaX() - coordenadasOrigen.getCoordenadaX();
 		return nominador / denominador;
+	}
+	
+	private ArrayList<Double> getSlopeArray(ArrayList<Double> arrayPendientes, Iterator<Cuerpo> cuerpoIterator) {
+		Cuerpo planetaOrigen = cuerpoIterator.next();
+		while (cuerpoIterator.hasNext()) {
+			Coordenadas coordenadasOrigen = this.determinarPuntos(planetaOrigen);
+			Cuerpo planetaDestino = cuerpoIterator.next();
+			Coordenadas coordenadasDestino = this.determinarPuntos(planetaDestino);
+			Double pendiente = determinarPendiente(coordenadasOrigen, coordenadasDestino);
+			System.out.println(Math.round(pendiente * 100.0) / 100.0);
+			arrayPendientes.add(Math.round(pendiente * 100.0) / 100.0);
+			planetaOrigen = planetaDestino;
+		}
+		return arrayPendientes;
+	}
+	
+	private Boolean slopeComparator(ArrayList<Double> arrayPendientes) {
+		Double pendienteAnterior = arrayPendientes.get(0);
+		for (Double pendiente : arrayPendientes) {
+			Double valorAbsoluto = Math.abs(pendienteAnterior - pendiente);
+			if (valorAbsoluto >= 0.3) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
