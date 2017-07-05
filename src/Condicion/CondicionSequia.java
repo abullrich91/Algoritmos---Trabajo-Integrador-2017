@@ -5,13 +5,18 @@ import Helper.MovimientosCosmicos;
 
 public class CondicionSequia extends Condicion {
 	
+	public CondicionSequia(ConditionObservable co) {
+		this.co = co;
+	}
+	
 	@Override
 	public void atender(SistemaSolar sistemaSolar) {
-		if (MovimientosCosmicos.isWithinPlanetsArea(sistemaSolar)) {
-			System.out.println("Condicion Sequia");
+		if (MovimientosCosmicos.arePlanetsAlignedWithSun(sistemaSolar)) {
+			ConditionObservable ov = this.getCo();
+			ov.notificarInteresados("Condicion Sequia, planetas alineados con el sol");
 		} else {
-			this.setSiguiente(new CondicionLluvia());
-			siguiente.atender(sistemaSolar);
+			this.setSiguiente(new CondicionOptima(co));
+			this.getSiguiente().atender(sistemaSolar);
 		}
 	}
 	

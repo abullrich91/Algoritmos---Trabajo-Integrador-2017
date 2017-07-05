@@ -1,4 +1,5 @@
 package Helper;
+import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +21,13 @@ public class MovimientosCosmicos {
 	}
 	
 	public static Boolean isWithinPlanetsArea(SistemaSolar sistemaSolar) {
-		return false;
+		Polygon polygon = new Polygon();
+		for (Planeta planet : sistemaSolar.getPlanetas()) {
+			Coordenadas coordenadas = determinarPuntos(planet);
+			polygon.addPoint(coordenadas.getCoordenadaX().intValue(), coordenadas.getCoordenadaY().intValue());
+		}
+		Coordenadas coordenadasSol = determinarPuntos(sistemaSolar.getSol());
+		return polygon.contains(coordenadasSol.getCoordenadaX(), coordenadasSol.getCoordenadaY());
 	}
 	
 	private static Iterator<Cuerpo> createBodyIterator(List<Planeta> planetList, Sol sol) {
@@ -47,7 +54,7 @@ public class MovimientosCosmicos {
 			Cuerpo planetaDestino = cuerpoIterator.next();
 			Coordenadas coordenadasDestino = determinarPuntos(planetaDestino);
 			Double pendiente = determinarPendiente(coordenadasOrigen, coordenadasDestino);
-			System.out.println(Math.round(pendiente * 100.0) / 100.0);
+			// System.out.println(Math.round(pendiente * 100.0) / 100.0);
 			arrayPendientes.add(Math.round(pendiente * 100.0) / 100.0);
 			planetaOrigen = planetaDestino;
 		}
@@ -65,7 +72,7 @@ public class MovimientosCosmicos {
 		return true;
 	}
 	
-	private static Coordenadas determinarPuntos(Cuerpo planeta) {
+	public static Coordenadas determinarPuntos(Cuerpo planeta) {
 		Integer hipotenusa = planeta.getDistancia();
 		Double grados = planeta.getGrados();
 		Double catetoOpuesto = Math.sin(grados) * hipotenusa;

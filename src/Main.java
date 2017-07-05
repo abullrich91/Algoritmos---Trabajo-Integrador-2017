@@ -1,4 +1,9 @@
+import java.util.Observer;
+
+import Condicion.Condicion;
 import Condicion.CondicionSequia;
+import Condicion.ConditionObservable;
+import Condicion.ConditionObserver;
 import Galaxia.Galaxia;
 import Galaxia.Planeta;
 import Galaxia.SistemaSolar;
@@ -26,19 +31,29 @@ public class Main {
 
 		galaxia.addSistemaSolares(sistemaSolar);
 
+		ConditionObservable ov = new ConditionObservable();
+		Observer alderaanObserver = new ConditionObserver(ov);
+		Observer feluciaObserver = new ConditionObserver(ov);
+		Observer peragusObserver = new ConditionObserver(ov);
+		ov.addObserver(alderaanObserver);
+		ov.addObserver(feluciaObserver);
+		ov.addObserver(peragusObserver);
+		
 		// Menor a diez años
 		while (dia <= 3650) {
 			for (SistemaSolar ss : galaxia.getSistemasSolares()) {
 				for (Planeta planeta : ss.getPlanetas()) {
 					sol.rotate(planeta);
 				}
-				CondicionSequia condicionSequia = new CondicionSequia();
+				Condicion condicionSequia = new CondicionSequia(ov);
 				condicionSequia.atender(ss);
 				dia++;
 				System.out.println("################");
 				System.out.println("Día: " + dia.toString());
-				System.out.println("################");
+//				System.out.println("################");
 			}
 		}
+		
+		// TODO imprimir totales de eventos
 	}
 }
